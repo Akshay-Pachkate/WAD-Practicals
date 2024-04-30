@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Songs</title>
+
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            margin-top: 5px;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .view-songs{
+            background-color: #4c5caf;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        .view-songs:hover {
+            background-color: #4254b1;
+        }
+
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20%;
+            background-color: #f1f1f1;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Songs</h1>
+        <button class="view-songs">View Songs</button>
+    </header>
+    <div>
+        <form >
+            <label for="SongName">Song Name</label>
+            <input type="text" name="SongName" id="SongName">
+
+            <label for="Film">Film</label>
+            <input type="text" name="Film" id="Film">
+
+            <label for="MusicDirector">Music Director</label>
+            <input type="text" name="MusicDirector" id="MusicDirector">
+
+            <label for="Singer">Singer</label>
+            <input type="text" name="Singer" id="Singer">
+
+            <label for="Actor">Actor</label>
+            <input type="text" name="Actor" id="Actor">
+
+            <label for="Actress">Actress</label>
+            <input type="text" name="Actress" id="Actress">
+
+            <button type="submit">Add Song</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const SongName = document.querySelector('#SongName').value;
+            const Film = document.querySelector('#Film').value;
+            const MusicDirector = document.querySelector('#MusicDirector').value;
+            const Singer = document.querySelector('#Singer').value;
+            const Actor = document.querySelector('#Actor').value;
+            const Actress = document.querySelector('#Actress').value;
+
+            fetch('/insertSong', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    SongName,
+                    Film,
+                    MusicDirector,
+                    Singer,
+                    Actor,
+                    Actress
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data) {
+                    alert('Song added successfully');
+                } else {
+                    alert('Failed to add song');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        });
+
+        const viewSongs = document.querySelector('.view-songs');
+        viewSongs.addEventListener('click', () => {
+            window.location.href = '/displayInBrowser';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Register Users</title>
+</head>
+<body>
+    
+    <div class="form-wrapper">
+        <h1>Register Users</h1>
+        <form  id="registrationForm">
+        <table >
+            <tr>
+                <td><label for="fname">First Name</label></td>
+                <td>
+                    <input type="text" name="fname" id="fname" placeholder="Enter your first name" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="lname">Last Name</label></td>
+                <td>
+                    <input type="text" name="lname" id="lname" placeholder="Enter your last name" required>
+                </td>
+            </tr>
+                        
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><label for="address">Address</label></td>
+                <td>
+                    <textarea name="address" id="address" placeholder="Enter your address" rows="3"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="phone">Phone</label></td>
+                <td>
+                    <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required>
+                </td>
+            </tr>
+
+            <tr>
+            <td><label for="gender">Gender</label></td>
+            <td>
+                <input type="radio" name="gender" id="male" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" name="gender" id="female" value="female" required>
+                <label for="female">Female</label>
+            </td>
+            </tr>
+            
+        
+
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><select   name="age" id="age">
+                    <option value="18" disabled hidden selected>Select age</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><label for="profilePhoto">Profile Photo</label></td>
+                <td><input id="photo" type="file"></td>
+            </tr>
+
+            
+
+        </table>
+
+            <button id="submitBtn" >Register</button>
+        </form>
+    </div>
+
+    <div class="image-wrapper">
+        <img src="images/Register.svg" alt="">
+    </div>
+
+    <script src="js/index.js" ></script>
+</body>
+</html>

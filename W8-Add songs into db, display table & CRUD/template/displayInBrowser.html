@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Songs</title>
+    <style>
+        .btn-del{
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: auto;
+            padding: 4px 8px;
+        }
+
+        .add-song{
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20%;
+            background-color: #f1f1f1;
+        }
+
+
+        table{
+            margin-top: 20px;
+        }
+
+        .nav{
+            padding: 10px 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-songs{
+            background-color: #717171;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Songs</h1>
+            <button class="add-song">Add Song</button>
+    </header>
+
+    <div class="nav">
+        <div>
+            <label for="musicDirector">Director Name:</label>
+            <input id="musicDirector" type="text" placeholder="Enter director name">
+        </div>
+
+        <div>
+            <label for="singer">Singer</label>
+            <input id="singer" type="text" placeholder="Enter singer name">
+        </div>
+
+        <button class="search-songs">search Songs</button>
+    </div>
+    
+    <div>
+        <table>
+            <tr>
+                <th>Sr. No</th>
+                <th>Song Name</th>
+                <th>Film</th>
+                <th>Music Director</th>
+                <th>Singer</th>
+                <th>Actor</th>
+                <th>Actress</th>
+                <th>Action</th>
+            </tr>
+
+            <tbody>
+                {{songsInDb}}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const deleteSong = (id) => {
+            fetch(`/deleteSong/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if(res.ok){
+                    return res.json();
+                }else{
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+
+        const searchSongs = (director, singer) => {
+            console.log(director, singer);
+            window.location.href = `/displayInBrowser?director=${director}&singer=${singer}`;
+            
+        }
+
+        const btns = document.querySelectorAll('.btn-del');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', (e) => deleteSong(e.target.id));
+        })
+
+        const addBtn = document.querySelector('.add-song');
+        addBtn.addEventListener('click', () => {
+            window.location.href = '/';
+        });
+
+
+        const searchBtn = document.querySelector('.search-songs');
+
+        searchBtn.addEventListener('click', () => {
+            const director = document.querySelector('#musicDirector').value;
+            const singer = document.querySelector('#singer').value;
+            searchSongs(director, singer);
+        });
+
+
+    </script>
+</body>
+</html>

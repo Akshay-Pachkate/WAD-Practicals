@@ -1,0 +1,15 @@
+.navigator{
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    gap: 10px;
+    a{
+        padding: 10px 20px;
+        background-color: #336fd0;
+        text-decoration: none;
+        color: white;
+        border-radius: 10px;
+    }
+}
